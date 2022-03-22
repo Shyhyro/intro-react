@@ -2,10 +2,13 @@
 import "./ProductsList.css";
 import {Product} from "../Product/Product";
 
-export const ProductsList = () => {
+export const ProductsList = ({products, setIsProductUpdated}) => {
+
     return (
-        <div className="ProductsList">
-            <Product />
-        </div>
+        <ul className="products-list">
+            {products.map(product =>
+                <Product key={product.id} product={product} setIsProductUpdated={setIsProductUpdated} />
+            )}
+        </ul>
     );
 };

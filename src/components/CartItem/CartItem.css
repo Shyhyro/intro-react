@@ -1,11 +1,11 @@
-.CartItem {
+.cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
 }
 
-.CartItem img {
+.cart-item img {
     width: 20px;
     height: 20px;
 }

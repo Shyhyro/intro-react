@@ -1,4 +1,4 @@
-.QuantitySelector {
+.quantity-selector {
     margin-left: 20px;
     padding: 10px;
     border-radius: 10px;
@@ -10,17 +10,17 @@
     justify-content: space-between;
 }
 
-.add {
+.quantity-selector-plus {
     background-color: cornflowerblue;
     color: #F1F2F3;
 }
 
-.remove, .add {
+.quantity-selector-minus, .quantity-selector-plus {
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 5px;
 }
 
-.remove {
+.quantity-selector-minus {
     background-color: lightgrey;
 }

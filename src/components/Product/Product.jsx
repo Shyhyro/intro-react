@@ -1,38 +1,53 @@
 
 import "./Product.css";
-import image1 from "../../assets/images/image1.png";
-import image2 from "../../assets/images/image2.png";
-import image3 from "../../assets/images/image3.png";
-import image4 from "../../assets/images/image4.png";
 
-import {QuantitySelector} from "../QuantitySelector/QuantitySelector";
+export const Product = ({product, setIsProductUpdated}) => {
 
-import {ProductStockStatus} from "../ProductStockStatus/ProductStockStatus";
+    /**
+     * Gere le fait de retirer un produit 'product' du panier.
+     * @param e
+     */
+    function handleMinusClick(e) {
+        // On ne commande pas le -1 fois un produit...
+        if (product.cart > 0 ) {
+            product.cart -= 1;
+            setIsProductUpdated(true);
+        }
+    }
 
-export const Product = () => {
-    const products = [
-        {id: 1, image: image1, name: "Disque dur", price: 85.32, stock: 20 },
-        {id: 2, image: image2, name: "Ordinateur", price: 899.99, stock: 5 },
-        {id: 3, image: image3, name: "Ecran", price: 166.99, stock: 10},
-        {id: 4, image: image4, name: "Bureau", price: 350.50, stock: 6},
-    ];
+    /**
+     * On gère l'ajout d'un produit au panier
+     * @param e
+     */
+    function handlerPlusClick(e) {
+        // On ne commande pas un produit s'il n'est plus en stock.
+        if (product.cart < product.stock) {
+            product.cart += 1;
+            setIsProductUpdated(true);
+        }
+    }
 
     return (
-        <div>
-            {products.map(product =>
-                <div className="Product" key={product.id}>
-                    <img src={product.image} alt="Product image" />
-                    <div className="Product_detail">
-                        <p className="like">Like</p>
-                        <h3 className={"product_name" + (product.stock === 0 && 'out-of-stock')}>{product.name} <ProductStockStatus stock = {product.stock}/></h3>
-                        <p className="ProductDescription">Description:
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Animi autem dicta ipsam iure maiores molestias nam, odio perferendis</p>
-                        <p className="price">${product.price}</p>
-                        <QuantitySelector />
+        <div className="product">
+
+            <div className="product-image">
+                <img src={ require(`../../assets/images/${product.image}`)} alt="" />
+            </div>
+
+            <div className="product-content">
+                <p className="product-name">{product.name}</p>
+                <p className="product-description">{product.description}</p>
+
+                <div className="product-footer">
+                    <div className="quantity-selector">
+                        <button onClick={handleMinusClick}>-</button>
+                        <div>{product.cart}</div>
+                        <button onClick={handlerPlusClick}>+</button>
                     </div>
+                    <span className="product-price">${product.price}</span>
                 </div>
-            )}
+            </div>
+
         </div>
     );
 };
